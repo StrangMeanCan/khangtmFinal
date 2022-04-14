@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body onload="ss();">
+    <div class="giohang">
+        <a onclick="showcart();"><img src="images/cart.png"><span id="countsp">0</span></a>
+    </div>
+    <div class="container">
+        <div id="a">
+            <table>
+                <tr>
+                    <th>STT</th>
+                    <th>Hình</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền ($)</th>
+                </tr>
+                <tbody id="mycart">
+
+                </tbody>
+
+            </table>
+        </div>
+        <div class="boxcenter">
+            <div class="row mb header">
+                <h1> SIÊU THỊ TRỰC TUYẾN</h1>
+            </div>
+            <script>
+                var c = JSON.parse(sessionStorage.getItem("sp"));
+                function ss() {
+                    var tongtt = 0;
+                    var ttgh = "";
+                    for (let i = 0; i < c.length; i++) {
+                        var tt = Number(c[i][3]) * Number(c[i][4]);
+                        tongtt += tt;
+                        ttgh += `
+        <tr>
+            <td>${i + 1}</td>
+            <td><img src='${c[i][1]}'></td>
+            <td>${c[i][2]}</td>
+            <td>${c[i][3]}</td>
+            <td>${c[i][4]}</td>
+             <td>${tt} $</td>
+        </tr>
+        `
+                    }
+
+                    ttgh += `
+    <tr>
+            <td colspan="5">TONG DON HANG</td>
+            <td>${tongtt} $</td>
+        </tr>
+        `
+                    document.getElementById("mycart").innerHTML = ttgh;
+                }
+            </script>
+</body>
+
+</html>
